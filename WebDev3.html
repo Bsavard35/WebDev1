@@ -94,19 +94,40 @@
        <script>
     // Create variable to hold map element, give initial settings to map
     var map = L.map('map',{ center: [46.7867, -92.1005], zoom: 12}); 
-          
+         
+           Source: http://leaflet-extras.github.io/leaflet-providers/preview/ 
+           var Thunderforest_TransportDark = L.tileLayer('https://{s}.tile.thunderforest.com/transport-dark/{z}/{x}/{y}.png?apikey={apikey}', {
+	attribution: '&copy; <a href="http://www.thunderforest.com/">Thunderforest</a>, &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+	apikey:  'd8ebd0005b0d499b9953b6859696b681',
+	maxZoom: 22
+}).addTo(map); 
            
           // Add OpenStreetMap tile layer to map element
-L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap' }).addTo(map);
 omnivore.csv('airports.csv').addTo(map); 
-           
+           Source: http://duspviz.mit.edu/web-map-workshop/leaflet-js/ 
 var EngerDataPoint = L.marker([46.7761, -92.1250]).addTo(map);
 EngerDataPoint.bindPopup("<h3>Enger Tower</h3><p>Duluth, MN<br>Beaituful view of Duluth</p>");
 var AmsoilDataPoint = L.marker([46.7804, -92.0997]).addTo(map);
   AmsoilDataPoint.bindPopup("This is amsoil arena home of the BullDogs!.");         
 var LiftBridgeDataPoint = L.marker([46.7797, -92.0935]).addTo(map);
-       LiftBridgeDataPoint.bindPopup("This is the famous lift bridge in Duluth Mn");    
-          </script> 
+       LiftBridgeDataPoint.bindPopup("This is the famous lift bridge in Duluth Mn");  
+        
+           // Create an Empty Popup
+var popup = L.popup();
+
+// Write function to set Properties of the Popup
+function onMapClick(e) {
+    popup
+        .setLatLng(e.latlng)
+        .setContent("You clicked the map at " + e.latlng.toString())
+        .openOn(map);
+}
+
+// Listen for a click event on the Map element
+map.on('click', onMapClick);
+
+           
+      </script> 
        
     
 </body>
