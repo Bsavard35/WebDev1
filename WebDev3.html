@@ -95,9 +95,17 @@
     // Create variable to hold map element, give initial settings to map
     var map = L.map('map',{ center: [46.7867, -92.1005], zoom: 12}); 
           
+           
           // Add OpenStreetMap tile layer to map element
 L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap' }).addTo(map);
-omnivore.csv('airports.csv').addTo(map);
+omnivore.csv('airports.csv').addTo(map); 
+           
+var EngerDataPoint = L.marker([46.7761, -92.1250]).addTo(map);
+EngerDataPoint.bindPopup("<h3>Enger Tower</h3><p>Duluth, MN<br>Beaituful view of Duluth</p>");
+var AmsoilDataPoint = L.marker([46.7804, -92.0997]).addTo(map);
+  AmsoilDataPoint.bindPopup("This is amsoil arena home of the BullDogs!.");         
+var LiftBridgeDataPoint = L.marker([46.7797, -92.0935]).addTo(map);
+       LiftBridgeDataPoint.bindPopup("This is the famous lift bridge in Duluth Mn");    
           </script> 
        
     
