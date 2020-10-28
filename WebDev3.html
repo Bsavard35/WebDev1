@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head> 
+    
+      <style> 
+          
+        /* 
+            styling to make map full-screen
+            source: https://leafletjs.com/examples/mobile/
+        */
+        body {
+            padding: 0;
+            margin: 0;
+        }
+        html, body, #map {
+            height: 100%;
+            width: 100%;
+        }
+        #map {
+            top: 60px;
+        }
+        
+        /*  
+            Header styling
+            ref: http://jsfiddle.net/agorshkov23/5osbcpyc/
+        */
+        #header {
+            /* positions at the top of the page */
+            top: 0;
+            /* make it full width */
+            width: 100%;
+            /* make it visible on top of the map */
+            z-index: 999999;
+            /* fixed position within <body> */
+            position: fixed;
+            /* note that the map is positioned this far from the top of the
+            page*/
+            height: 60px;
+            /* white text */
+            color: white;
+            /* green background */
+            background-color: green;
+            /* some spacing */
+            padding-left: 12px;
+            /* my attempt at not overlapping the map*/
+            overflow: hidden;
+            /* different font */
+            font-family: Helvetica, sans-serif;
+        }
+        /* header children styling */
+        #header * {
+            /* put everything on the same line */
+            display: inline-block;
+            margin-right: 20px;
+            margin-top: 10px;
+        }
+        /* bring items to the right */
+        .right {
+            float: right;
+        }
+        /* link or anchor tag(<a>) styling */
+        a {
+            color: aqua;
+        }
+        /* put this text in line with other text in header */
+        #header h5 {
+            margin-top: 25px;
+        }
+    </style>
+
+	<meta charset="utf-8">
+	<title>Leaflet Map</title>
+    
+    <!-- External Stylesheets -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    
+</head>
+   <body>
+       
+        <!-- Possible solution for a header -->
+    <header id="header">
+        <h2>A Leaflet map!</h2>
+        <h3><a href="https://leafletjs.com" target="_blank">I built this with leaflet</a></h3>
+        <h5 class="right">GIS4533 | Fall 2020 | Ben Savard</h5>
+    </header>
+
+       
+       <div id="map"></div>
+    <!-- Our web map and content will go here -->
+    
+    <!-- Add the Leaflet JavaScript library -->
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script> 
+    <script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.3.1/leaflet-omnivore.min.js'></script>
+       <script>
+    // Create variable to hold map element, give initial settings to map
+    var map = L.map('map',{ center: [46.7867, -92.1005], zoom: 12}); 
+         
+           Source: http://leaflet-extras.github.io/leaflet-providers/preview/ 
+           var Thunderforest_TransportDark = L.tileLayer('https://{s}.tile.thunderforest.com/transport-dark/{z}/{x}/{y}.png?apikey={apikey}', {
+	attribution: '&copy; <a href="http://www.thunderforest.com/">Thunderforest</a>, &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+	apikey:  'd8ebd0005b0d499b9953b6859696b681',
+	maxZoom: 22
+}).addTo(map); 
+           
+          // Add OpenStreetMap tile layer to map element
+omnivore.csv('airports.csv').addTo(map); 
+           Source: http://duspviz.mit.edu/web-map-workshop/leaflet-js/ 
+var EngerDataPoint = L.marker([46.7761, -92.1250]).addTo(map);
+EngerDataPoint.bindPopup("<h3>Enger Tower</h3><p>Duluth, MN<br>Beaituful view of Duluth</p>");
+var AmsoilDataPoint = L.marker([46.7804, -92.0997]).addTo(map);
+  AmsoilDataPoint.bindPopup("This is amsoil arena home of the BullDogs!.");         
+var LiftBridgeDataPoint = L.marker([46.7797, -92.0935]).addTo(map);
+       LiftBridgeDataPoint.bindPopup("This is the famous lift bridge in Duluth Mn");  
+        
+           // Create an Empty Popup
+var popup = L.popup();
+
+// Write function to set Properties of the Popup
+function onMapClick(e) {
+    popup
+        .setLatLng(e.latlng)
+        .setContent("You clicked the map at " + e.latlng.toString())
+        .openOn(map);
+}
+
+// Listen for a click event on the Map element
+map.on('click', onMapClick);
+
+           
+      </script> 
+       
+    
+</body>
+</html>
