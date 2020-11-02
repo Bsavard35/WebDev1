@@ -14,7 +14,15 @@
     
     <!-- Add the Leaflet JavaScript library -->
 <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script> 
-      <script>
+     <body>
+    ...
+        <!-- HTML Page Elements are here -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <!-- Web Map Scripts are here -->
+    ...
+</body>
+       <script>
+
     // Create variable to hold map element, give initial settings to map
     var map = L.map('map',{ center: [42.362432, -71.086086], zoom: 14}); 
           
@@ -36,7 +44,7 @@ var myArea = L.polygon([[42.353770, -71.103606], [42.355447, -71.104475],
 
 // Bind popup to data point object
 myDataPoint.bindPopup("<h3>Kendall Square</h3><p>Cambridge, MA<br>Information about Kendall Square.</p>");
-
+       
 // Bind popup to line object
 myDataLine.bindPopup("Mass Ave Bridge");
 // Bind popup to area object
@@ -56,9 +64,18 @@ function onMapClick(e) {
 // Listen for a click event on the Map element
 map.on('click', onMapClick);
 
+$.getJSON("coffee_cafes.geojson",function(data){
+    // add GeoJSON layer to the map once the file is loaded
+    L.geoJson(data,{
+        onEachFeature: function (feature, layer) {
+            layer.bindPopup(feature.properties.name);
+        }
+    }).addTo(map);
+});
           
-          </script> 
-       
+                    </script> 
+         
+
     
 </body>
 </html>
